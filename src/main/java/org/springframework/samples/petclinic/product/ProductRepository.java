@@ -9,17 +9,21 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface ProductRepository  extends CrudRepository<Product, Integer>{
 	
-	@Query("SELECT product FROM Product product")
+	@Query("SELECT p FROM Product p")
     List<Product> findAll();
 	
-	@Query("SELECT productType FROM ProductType productType")
+    @Query("SELECT p FROM ProductType p")
     List<ProductType> findAllProductTypes();
+    
+    @Query("SELECT pt FROM ProductType pt WHERE pt.name = ?1")
+    ProductType findProductTypeByName(String name);
 	
-	@Query("SELECT product FROM Product product WHERE product.id = ?1")
     Optional<Product> findById(int id);
-    
-	@Query("SELECT product FROM Product product ")
-    Product findByName(String name);
-    
+	
+	Product findByName(String name);
+	
+	@Query("SELECT p FROM Product p WHERE p.price < ?1")
+	List<Product> findByPriceLessThan(double price);
+	
     Product save(Product p);
 }
