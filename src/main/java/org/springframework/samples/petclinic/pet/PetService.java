@@ -33,8 +33,10 @@ import org.springframework.util.StringUtils;
 @Service
 public class PetService {
 
+	@Autowired
 	private PetRepository petRepository;
 	
+	@Autowired
 	private VisitRepository visitRepository;
 	
 
